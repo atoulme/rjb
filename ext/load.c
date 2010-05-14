@@ -295,7 +295,8 @@ int rjb_create_jvm(JNIEnv** pjenv, JavaVMInitArgs* vm_args, char* userpath, VALU
             }
 #endif
         }
-#if RJB_RUBY_VERSION_CODE < 190
+ 
+#if RJB_RUBY_VERSION_CODE < 190 && !defined(RUBINIUS)
         ruby_errinfo = Qnil;
 #else
         rb_set_errinfo(Qnil);

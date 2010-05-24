@@ -1781,7 +1781,7 @@ static VALUE rjb_s_unload(int argc, VALUE* argv, VALUE self)
 {
     int result = 0;
 #ifdef RHASH_TBL
-#if RHASH_TBL == 1
+#if HAVE_RB_HASH_FOREACH
 	rb_hash_foreach(rjb_loaded_classes, clear_classes, 0);
 #else
     st_foreach(RHASH_TBL(rjb_loaded_classes), clear_classes, 0);
@@ -2303,7 +2303,7 @@ static void register_class(VALUE self, VALUE clsname)
      * the hash was frozen, so it need to call st_ func directly.
      */
 #ifdef RHASH_TBL
-#if RHASH_TBL == 1
+#ifdef HAVE_RB_HASH_ASET
 	rb_hash_aset(rjb_loaded_classes, clsname, self);
 #else
     st_insert(RHASH_TBL(rjb_loaded_classes), clsname, self);

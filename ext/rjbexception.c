@@ -55,7 +55,7 @@ VALUE rjb_get_exception_class(JNIEnv* jenv, jstring str)
     {
 	rexp = rb_define_class(pcls, rb_eStandardError);
 #ifdef RHASH_TBL
-#if RHASH_TBL == 1
+#ifdef HAVE_RB_HASH_ASET
 	rb_hash_aset(rjb_loaded_classes, cname, rexp);
 #else
     st_insert(RHASH_TBL(rjb_loaded_classes), cname, rexp);

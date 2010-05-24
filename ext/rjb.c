@@ -2852,7 +2852,9 @@ void Init_rjbcore()
     rb_protect((VALUE(*)(VALUE))rb_require, (VALUE)"iconv", NULL);
 
     rjb_loaded_classes = rb_hash_new();
+#ifndef RUBINIUS
     OBJ_FREEZE(rjb_loaded_classes);
+#endif
     rb_global_variable(&rjb_loaded_classes);
     proxies = rb_ary_new();
     rb_global_variable(&proxies);

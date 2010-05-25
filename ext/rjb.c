@@ -2302,14 +2302,15 @@ static void register_class(VALUE self, VALUE clsname)
     /*
      * the hash was frozen, so it need to call st_ func directly.
      */
-#ifdef RHASH_TBL
+
 #ifdef HAVE_RB_HASH_ASET
 	rb_hash_aset(rjb_loaded_classes, clsname, self);
 #else
+#ifdef RHASH_TBL
     st_insert(RHASH_TBL(rjb_loaded_classes), clsname, self);
-#endif
 #else
     st_insert(RHASH(rjb_loaded_classes)->tbl, clsname, self);
+#endif
 #endif
 }
 

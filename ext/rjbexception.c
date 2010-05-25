@@ -54,14 +54,14 @@ VALUE rjb_get_exception_class(JNIEnv* jenv, jstring str)
     if (rexp == Qnil)
     {
 	rexp = rb_define_class(pcls, rb_eStandardError);
-#ifdef RHASH_TBL
 #ifdef HAVE_RB_HASH_ASET
 	rb_hash_aset(rjb_loaded_classes, cname, rexp);
 #else
+#ifdef RHASH_TBL
     st_insert(RHASH_TBL(rjb_loaded_classes), cname, rexp);
-#endif
 #else
     st_insert(RHASH(rjb_loaded_classes)->tbl, cname, rexp);
+#endif
 #endif
 	
     }

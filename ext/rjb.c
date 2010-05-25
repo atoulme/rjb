@@ -1780,14 +1780,14 @@ static int clear_classes(VALUE key, VALUE val, VALUE dummy)
 static VALUE rjb_s_unload(int argc, VALUE* argv, VALUE self)
 {
     int result = 0;
-#ifdef RHASH_TBL
-#if HAVE_RB_HASH_FOREACH
+#ifdef HAVE_RB_HASH_FOREACH
 	rb_hash_foreach(rjb_loaded_classes, clear_classes, 0);
 #else
+#ifdef RHASH_TBL
     st_foreach(RHASH_TBL(rjb_loaded_classes), clear_classes, 0);
-#endif
 #else
     st_foreach(RHASH(rjb_loaded_classes)->tbl, clear_classes, 0);
+#endif
 #endif
     
     if (rjb_jvm)
